@@ -5,19 +5,28 @@
     user-select: none !important;
 }
 
-.container {
+body {
+    background-color: black;
     display: flex;
     justify-content: center;
-    width: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
     height: 100vh;
     overflow: hidden;
     background-color: #313133;
-    align-items: center;
 
     header {
         padding: 40px;
         overflow: hidden;
         margin-top: -40px;
+
+        animation: getUp 1s cubic-bezier(1, 0, 0, 1.01) 2s forwards;
 
         .junction {
             display: flex;
@@ -27,6 +36,13 @@
             #brain {
                 width: 170px;
                 height: 170px;
+                animation-name: starter-brain, tricky;
+                animation-duration: 2s, 2s;
+                animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1), cubic-bezier(1, 0, 0, 1.01);
+                animation-iteration-count: initial, infinite;
+                animation-direction: inherit, alternate-reverse;
+                animation-delay: 0s, 0.5s;
+
             }
 
             #ludus {
@@ -34,10 +50,13 @@
                 font-size: 165px;
                 color: rgba(206, 0, 138, 0.85);
                 text-shadow: 0px 5px 20px #16042b;
+
+                animation: jump 2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
             }
         }
 
         p {
+            opacity: 0%;
             width: 865px;
             height: 23px;
             margin-left: 170px !important;
@@ -51,6 +70,72 @@
             text-shadow: 0px 5px 20px #16042b;
             letter-spacing: -2.4px;
 
+            animation: appear 1s linear forwards;
+            animation-delay: 1s;
+
         }
+    }
+
+    main {
+
+        margin-top: 70px;
+        padding-inline: 270px;
+
+        p {
+            font-size: 40px;
+            text-align: justify;
+            color: #8FCE12;
+            font-weight: 600;
+            opacity: 0%;
+            animation: appear 1s linear forwards;
+            animation-delay: 2.5s;
+        }
+    }
+}
+
+/* ANiMATiON's */
+
+@keyframes starter-brain {
+    0% {
+        margin-right: -800px;
+    }
+
+    100% {}
+}
+
+@keyframes tricky {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(1800deg);
+    }
+
+}
+
+@keyframes jump {
+
+    0% {
+        transform: translateY(-340px) translateX(450px);
+    }
+
+    100% {}
+}
+
+@keyframes appear {
+
+    0% {}
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes getUp {
+    0% {}
+
+    100% {
+        margin-top: -31%;
     }
 }
