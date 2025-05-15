@@ -1,0 +1,56 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none !important;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #313133;
+    align-items: center;
+
+    header {
+        padding: 40px;
+        overflow: hidden;
+        margin-top: -40px;
+
+        .junction {
+            display: flex;
+            justify-content: center;
+            margin: -40px;
+
+            #brain {
+                width: 170px;
+                height: 170px;
+            }
+
+            #ludus {
+                font-family: 'Silkscreen', 'Courier New', Courier, monospace;
+                font-size: 165px;
+                color: rgba(206, 0, 138, 0.85);
+                text-shadow: 0px 5px 20px #16042b;
+            }
+        }
+
+        p {
+            width: 865px;
+            height: 23px;
+            margin-left: 170px !important;
+
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 21px;
+            font-weight: 900;
+            text-align: center;
+            color: #8FCE12;
+
+            text-shadow: 0px 5px 20px #16042b;
+            letter-spacing: -2.4px;
+
+        }
+    }
+}
