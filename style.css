@@ -14,17 +14,17 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 70%;
-    height: 100vh;
-    overflow: hidden;
-    background-color: #313133;
+    height: 100%;
+    padding-bottom: 300px;
+    background: linear-gradient(to bottom, #313133 0% 80%, #20202236 95% 100%);
+    box-shadow: inset 0px -5px 50px 10px rgba(0, 0, 0, 0.521);
 
     header {
         padding: 40px;
         overflow: hidden;
-        margin-top: -40px;
+        position: absolute;
 
         animation: getUp 1s cubic-bezier(1, 0, 0, 1.01) 2s forwards;
 
@@ -79,64 +79,74 @@ body {
     main {
 
         margin-top: 70px;
-        padding-inline: 270px;
+        padding-inline: 40px;
+        animation: appear 1s linear forwards;
+        animation-delay: 2.5s;
+        opacity: 0%;
 
         p {
-            font-size: 40px;
+            font-size: 30px;
             text-align: justify;
             color: #8FCE12;
             font-weight: 600;
-            opacity: 0%;
-            animation: appear 1s linear forwards;
-            animation-delay: 2.5s;
+
         }
-    }
-}
 
-/* ANiMATiON's */
+        #images-text {
+            img {
+                float: left;
+            }
+        }
 
-@keyframes starter-brain {
-    0% {
-        margin-left: -800px;
-    }
+        .news-section {
+            padding: 60px 20px;
+            color: #fff;
+        }
 
-    100% {}
-}
+        .news-section h3 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #8FCE12;
+        }
 
-@keyframes tricky {
-    0% {
-        transform: rotate(0deg);
-    }
+        .news-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-    100% {
-        transform: rotate(1800deg);
-    }
+        .news-card {
+            background-color: #313133;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
 
-}
+        .news-card time {
+            font-size: 14px;
+            color: #999;
+        }
 
-@keyframes jump {
+        .news-card h4 {
+            font-size: 20px;
+            margin: 10px 0;
+        }
 
-    0% {
-        transform: translateY(-340px) translateX(450px);
-    }
+        .news-card p {
+            font-size: 16px;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
 
-    100% {}
-}
+        .news-card a {
+            color: #8FCE12;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-@keyframes appear {
-
-    0% {}
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@keyframes getUp {
-    0% {}
-
-    100% {
-        margin-top: -31%;
     }
 }
 
@@ -197,4 +207,55 @@ body {
 
 .left-menu a:hover {
     color: rgba(206, 0, 138, 0.85);
+}
+
+
+/* ANiMATiON's */
+
+@keyframes starter-brain {
+    0% {
+        margin-left: -800px;
+    }
+
+    100% {}
+}
+
+@keyframes tricky {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(1800deg);
+    }
+
+}
+
+@keyframes jump {
+
+    0% {
+        transform: translateY(-340px) translateX(450px);
+    }
+
+    100% {}
+}
+
+@keyframes appear {
+
+    0% {}
+
+    100% {
+        opacity: 1;
+
+    }
+}
+
+@keyframes getUp {
+    0% {}
+
+    100% {
+        margin-left: 50%;
+        float: right;
+        zoom: 50%;
+    }
 }
