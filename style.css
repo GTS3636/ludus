@@ -2,7 +2,11 @@
     padding: 0;
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    user-select: none !important;
+
+    img {
+        user-select: none !important;
+        -webkit-user-drag: none !important; 
+    }
 }
 
 body {
@@ -25,6 +29,7 @@ body {
         padding: 40px;
         overflow: hidden;
         position: absolute;
+        user-select: none !important;
 
         animation: getUp 1s cubic-bezier(1, 0, 0, 1.01) 2s forwards;
 
@@ -278,4 +283,11 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background-color: rgba(206, 0, 138, 0.85);
+}
+
+/* MISC 2... MUDANDO A cor DA SELEÇÃO DO MOUSE */
+
+::selection {
+    background: #8FCE12;
+    color: #000;
 }
