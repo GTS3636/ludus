@@ -138,7 +138,7 @@ body {
     100% {
         margin-top: -31%;
     }
-} 
+}
 
 /* O MENU!!!!!!!!!!!!!!!*/
 .menu-button {
@@ -151,6 +151,10 @@ body {
     color: #8FCE12;
     border: none;
     cursor: pointer;
+}
+
+.menu-button:active {
+    transform: scale(0.9);
 }
 
 /* Menu lateral */
