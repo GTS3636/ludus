@@ -259,3 +259,23 @@ body {
         zoom: 50%;
     }
 }
+
+
+
+
+/* MISC!!! Alterando a barrazinha... (￣y▽￣)╭ Ohohoho..... */
+
+::-webkit-scrollbar {
+    background: #1a1a1a;
+    width: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #8FCE12;
+    border-radius: 5px;
+    border: 2px solid #313133;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(206, 0, 138, 0.85);
+}
