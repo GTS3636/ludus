@@ -1,0 +1,81 @@
+body{
+    background-color: #1d1d1f;
+    text-align: center;
+    color: white;
+    font-family: 'Silkscreen', sans-serif;  
+}
+h1{
+    font-size: 50px;
+    color: #ce008a;
+}
+label{
+    font-size: 20px;
+    font-family: Arial;
+}
+input{
+    width: 380px;
+    height: 45px;
+    font-size: 20px;
+    background-color: #454547;
+    border-radius: 10px;
+    color: white;
+    padding-left: 15px;
+}
+button{
+    background-color: #8fce12;
+    color: white;
+    border-radius: 50px;
+    width: 250px;
+    height: 52px;
+    font-size: 23px;
+    font-family: 'Silkscreen', sans-serif;
+}
+
+.grid{
+    display: grid;
+    grid-template-columns: 200px 200px 200px 200px 200px 200px;
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+.item{
+    text-align: center;
+    font-size: 23px;    
+    width: 230px;
+    /* border: solid blue; */
+}
+
+
+.grade{
+    display: grid;
+    grid-template-columns: 240px 240px 240px 240px 240px 240px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+.inp{
+    font-size: 23px;
+    width: 220px;    
+    padding-left: 10px;
+    padding-right: 0;
+}
+
+.adic{
+    background-color: #ce008a;
+    border-radius: 50px;
+    width: 300px;
+}
+
+hr{
+    margin-LEFT: 120px;
+    margin-right: 120PX;
+}
+
+h3{
+    font-size: 25px;
+}
