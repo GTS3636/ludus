@@ -217,6 +217,33 @@ body {
     color: rgba(206, 0, 138, 0.85);
 }
 
+/* links que levam o usario a cadastrar ou logar na conta... que fica no cantinho da tela */
+.conta {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1100;
+    font-size: 30px;
+    color: #8FCE12;
+    border: none;
+    cursor: pointer;
+
+    a{
+        font-size: 80%;
+        color: #ffffff;
+        font-weight: bold;
+        text-decoration: none;
+        margin: 10px;   
+        animation: glow 1s cubic-bezier(0.95, 0, 0, 0.91) infinite alternate-reverse;
+         
+    }
+    a:hover{
+        color: rgba(206, 0, 138, 0.85);
+    }
+    a:active{
+        color: #8FCE12;
+    }
+}
 
 /* ANiMATiON's */
 
@@ -268,6 +295,21 @@ body {
     }
 }
 
+@keyframes glow {
+    0% {
+        text-shadow: 0 15px rgba(206, 0, 137, 0.516),  0 -15px rgba(206, 0, 137, 0.533);
+    }
+
+    50%{
+        text-shadow: 0px 5px #8fce1275, -0px -5px #8fce1254;
+    }
+
+    100% {
+        text-shadow: none;
+    }
+    
+}
+
 
 
 
@@ -294,3 +336,4 @@ body {
     background: #8FCE12;
     color: #000;
 }
+
