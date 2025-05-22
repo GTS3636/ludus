@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +9,10 @@
     <link rel="shortcut icon" href="../image/logo.png" type="image/x-icon">
     <title>Consultar Jogo</title>
 </head>
+
 <body>
     <br>
-    <h1>CONSULTAR POR ID</h1> 
+    <h1>CONSULTAR POR ID</h1>
     <main>
         <div>
             <label for="ID">ID:</label>
@@ -27,7 +29,8 @@
             <h3 class="item">GÊNERO</h3>
             <h3 class="item">DATA DE LANÇAMENTO</h3>
             <h3 class="item">NOTA</h3>
-        </div><hr><br>
+        </div>
+        <hr><br>
         <div class="grade">
             <input type="text" class="inp">
             <input type="text" class="inp">
@@ -35,11 +38,39 @@
             <input type="text" class="inp">
             <input type="text" class="inp">
             <input type="text" class="inp">
-        </div><br><hr><br><br><br><br><br><br><br><br><br>
+        </div><br>
+        <hr><br><br><br><br><br><br><br><br><br>
         <div class="funcoes">
-            <button id="editar" class="func">EDITAR</button>            
+            <button id="editar" class="func">EDITAR</button>
             <button id="atualizar" class="func">VOLTAR</button>
         </div>
     </main>
+
+    <button id="menu-toggle" class="menu-button">
+        &#9776;
+    </button>
+
+    <div class="left-menu" id="leftMenu">
+        <ul>
+            <li><a href="../html/index.html">Home</a></li>
+            <li><a href="../html/cadastrar.html">Cadastrar Jogos</a></li>
+            <li><a href="../html/consultar.html">Consultar Jogos</a></li>
+            <li><a href="../html/deletar.html">Apagar Jogos</a></li>
+            <li><a href="../html/atualizar.html">Atualizar Jogos</a></li>
+        </ul>
+    </div>
+
 </body>
+
 </html>
+
+
+<script>
+    // AQUI QUE SE ABRE O Menu!!!&*621!
+    const toggleButton = document.getElementById('menu-toggle');
+    const menu = document.getElementById('leftMenu');
+
+    toggleButton.addEventListener('click', () => {
+        menu.classList.toggle('open');
+    });
+</script>
