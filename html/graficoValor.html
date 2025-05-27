@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styleGrafiValor.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"defer></script>
+    <script src="grafiValor.js" defer></script>
+    <title>Gráfico de Valor</title>
+</head>
+<body>
+    <header>
+        <h1>Gráfico de quantidade de cada produto</h1>
+    </header>
+    <main>
+        <div class="dados">
+            <h1>Pegar os dados</h1>
+            <button id="gravar">Pegar</button>
+        </div>
+        <div class="grafico">
+            <h1>Gráfico de barras</h1>
+            <canvas id="graf"></canvas>
+        </div>
+    </main>
+    <style>
+        #graf{
+            max-height: 600px;
+            max-width: 1200px;
+        }
+    </style>
+</body>
+</html>

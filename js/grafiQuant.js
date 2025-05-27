@@ -3,15 +3,18 @@ let gravar = document.getElementById("gravar")
 let myChart
 let arrayNomes = []
 let arrayQuants = []
+let arrayValor = []
 gravar.addEventListener("click", ()=>{
     arrayNomes = [ ]
     arrayQuants = [ ]
+    arrayValor = [ ]
     fetch("https://api.npoint.io/d7adce794c9085cc1659")
     .then(resp=>resp.json())
     .then(data =>{
         data.games.forEach(produto => { // Se espera chegar o jogo Minecraft
             arrayNomes.push(produto.name)
             arrayQuants.push(produto.quantity)
+            arrayValor.push(produto.price)
         })
         if(myChart){
             myChart.destroy()
