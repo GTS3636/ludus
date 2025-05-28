@@ -33,7 +33,7 @@ adicionar.addEventListener('click', (e) => {
         })
         .then((dados) => {
             console.log("Dados do jogo consultado:", dados)
-            res.innerHTML = "Jogo encontrado! Preencha os campos e clique em Atualizar."
+            res.innerHTML = "Jogo encontrado! Verifique os campos e clique em Atualizar."
             cod.value = dados.cod
             nome.value = dados.name
             description.value = dados.description

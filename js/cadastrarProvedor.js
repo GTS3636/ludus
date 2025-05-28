@@ -1,80 +1,83 @@
 let consultar = document.getElementById('consultar')
 let adicionar = document.getElementById('adicionar')
-
+let res = document.getElementById('res')
+let cod = document.getElementById('cod')
+let nome = document.getElementById('name')
+let description = document.getElementById('description')
+let developers = document.getElementById('developers')
+let publisher = document.getElementById('publisher')
+let price = document.getElementById('price')
+let releaseDate = document.getElementById('releaseDate')
+let quantity = document.getElementById('quantity')
+let categories = document.getElementById('categories')
 let currentJogoId = null
 consultar.addEventListener('click', (e) => {
-    e.preventDefault();
-    let res = document.getElementById('res')
-    let cod = document.getElementById('cod')
-    let nome = document.getElementById('name')
-    let description = document.getElementById('description')
-    let developers = document.getElementById('developers')
-    let publisher = document.getElementById('publisher')
-    let price = document.getElementById('price')
-    let releaseDate = document.getElementById('releaseDate')
-    let quantity = document.getElementById('quantity')
-    let categories = document.getElementById('categories')
+    e.preventDefault()
     let inputId = document.getElementById('inputId').value
+    if (!inputId) {
+        res.innerHTML = "Por favor, digite o ID do jogo para consultar!"
+        res.className = 'error'
+        return;
+    }
     currentJogoId = Number(inputId)
     res.innerHTML = "Consultando..."
+    res.className = ''
+    cod.value = ''
+    nome.value = ''
+    description.value = ''
+    developers.value = ''
+    publisher.value = ''
+    price.value = ''
+    releaseDate.value = ''
+    quantity.value = ''
+    categories.value = ''
     fetch(`https://api.npoint.io/d7adce794c9085cc1659/games/${currentJogoId-1}`)
         .then((resp) => {
             if (!resp.ok) {
                 if (resp.status === 404) {
-                    throw new Error('Jogo não encontrado!')
+                    throw new Error('Jogo não encontrado na NPoint API!')
                 }
                 throw new Error(`Erro ${resp.status} - ${resp.statusText}`)
             }
             return resp.json()
         })
         .then((dados) => {
-            console.log("Dados do jogo consultado:", dados)
-            res.innerHTML = "Jogo encontrado! Preencha os campos e clique em Atualizar."
+            console.log("Dados do jogo consultado (NPoint):", dados)
+            res.innerHTML = "Jogo encontrado! Verifique os campos e clique em Cadastrar."
             cod.value = dados.cod
             nome.value = dados.name
             description.value = dados.description
-            developers.value = dados.developers
+            developers.value = dados.developer
             publisher.value = dados.publisher
             price.value = dados.price
-            releaseDate.value = dados.releaseDate
+            releaseDate.value = dados.release_date  
             quantity.value = dados.quantity
             categories.value = dados.categories
         })
         .catch((err) => {
-            console.error('Erro ao listar dados:', err)
+            console.error('Erro ao listar dados (NPoint):', err)
             res.innerHTML = `Erro ao consultar jogo: ${err.message}`
-            document.getElementById('updateGameForm').reset()
-            cod.value = ''
-            nome.value = ''
-            description.value = ''
-            developers.value = ''
-            publisher.value = ''
-            price.value = ''
-            releaseDate.value = ''
-            quantity.value = ''
-            categories.value = ''
-            currentJogoId = null
-        });
+            res.className = 'error'
+            reset()
+        })
 })
+function reset(){
+    cod.value = '' 
+    nome.value = ''
+    description.value = ''
+    developers.value = ''
+    publisher.value = ''
+    price.value = ''
+    releaseDate.value = ''
+    quantity.value = ''
+    categories.value = ''
+    currentJogoId = null
+}
 adicionar.addEventListener('click', (e) => {
     e.preventDefault()
-    let res = document.getElementById('res')
-    let cod = document.getElementById('cod')
-    let nome = document.getElementById('name')
-    let description = document.getElementById('description')
-    let developers = document.getElementById('developers')
-    let publisher = document.getElementById('publisher')
-    let price = document.getElementById('price')
-    let releaseDate = document.getElementById('releaseDate')
-    let quantity = document.getElementById('quantity')
-    let categories = document.getElementById('categories')
-    if (!currentJogoId) {
-        alert("Por favor, consulte um jogo primeiro!");
-        return;
-    }
     if (!cod.value || !nome.value || !description.value || !developers.value || !publisher.value || !price.value || !releaseDate.value || !quantity.value || !categories.value) {
         alert("Por favor, preencha todos os campos para atualização!")
-        return;
+        return
     }
     const valores = {
         cod: cod.value,
@@ -87,43 +90,39 @@ adicionar.addEventListener('click', (e) => {
         quantity: parseInt(quantity.value),
         categories: categories.value
     }
-    console.log("Enviando para o backend (Atualização):", valores)
-    res.innerHTML = "Atualizando..."
-    fetch(`http://localhost:8081/jogos/${currentJogoId}/atualizar`, {
-        method: 'PUT',
-        headers: {
+    console.log("Enviando para o backend (Atualização):", valores);
+    res.innerHTML = "Atualizando...";
+    res.className = ''
+    fetch(`http://localhost:8081/jogos/cadastrar`, {
+        method:'POST',
+        headers:{
             'Content-Type':'application/json'
         },
-        body: JSON.stringify(valores)
+        body:JSON.stringify(valores)
     })
-    .then((resp) => {
+    .then(resp => {
         if (!resp.ok) {
             throw new Error(`Erro ${resp.status} - ${resp.statusText}`)
         }
-        if (resp.status === 204) {
-            return null
-        }
         return resp.json()
     })
-    .then((dadosGrav) => {
-        console.log("Dados gravados:", dadosGrav);
+    .then(dadosGrav => {
         res.innerHTML = `
-            <strong>Jogo atualizado com sucesso!</strong><br>
-            <p>Código: ${dadosGrav ? dadosGrav.cod : valores.cod}</p>
-            <p>Nome: ${dadosGrav ? dadosGrav.name : valores.name}</p>
-            <p>Descrição: ${dadosGrav ? dadosGrav.description : valores.description}</p>
-            <p>Desenvolvedores: ${dadosGrav ? dadosGrav.developers : valores.developers}</p>
-            <p>Publicadora: ${dadosGrav ? dadosGrav.publisher : valores.publisher}</p>
-            <p>Preço em Dólares: ${dadosGrav ? dadosGrav.price : valores.price}</p>
-            <p>Data de lançamento: ${dadosGrav ? dadosGrav.releaseDate : valores.releaseDate}</p>
-            <p>Quantidade disponível: ${dadosGrav ? dadosGrav.quantity : valores.quantity}</p>
-            <p>Categorias: ${dadosGrav ? dadosGrav.categories : valores.categories}</p>
+            <strong>Jogo cadastrado com sucesso!</strong><br>
+            <p>Código: ${dadosGrav.cod}</p>
+            <p>Nome: ${dadosGrav.name}</p>
+            <p>Descrição: ${dadosGrav.description}</p>
+            <p>Desenvolvedores: ${dadosGrav.developers}</p>
+            <p>Publicadora: ${dadosGrav.publisher}</p>
+            <p>Preço em Dólares: ${dadosGrav.price}</p>
+            <p>Data de lançamento: ${dadosGrav.releaseDate}</p>
+            <p>Quantidade disponível: ${dadosGrav.quantity}</p>
+            <p>Categorias: ${dadosGrav.categories}</p>
         `
-        document.getElementById('updateGameForm').reset()
-        currentJogoId = null
+        reset()
     })
     .catch((err) => {
-        console.error('Erro ao gravar os dados no banco de dados:', err)
-        res.innerHTML = 'Erro ao atualizar jogo: ' + err.message
+        console.error('Erro ao gravar os dados no banco de dados!', err)
+        res.innerHTML = 'Erro ao cadastrar jogo: ' + err.message
     })
 })

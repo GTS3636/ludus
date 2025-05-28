@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/cadastrarProvedor.js" defer></script>
-    <title>Cadastro de Jogo por Provedor</title>
+    <title>Cadastro de jogo por Provedor</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -75,10 +75,10 @@
         .button-group button:hover {
             background-color: #0056b3;
         }
-        .button-group #adicionar {
+        .button-group #consultar { /* Alterado para #consultar */
             background-color: #28a745;
         }
-        .button-group #adicionar:hover {
+        .button-group #consultar:hover { /* Alterado para #consultar */
             background-color: #218838;
         }
         #res {
@@ -92,11 +92,16 @@
         #res strong {
             color: #28a745;
         }
+        #res.error {
+            border-color: #f5c6cb;
+            background-color: #f8d7da;
+            color: #721c24;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Cadastro de Jogo por Provedor</h1>
+        <h1>Cadastro de jogo por Provedor</h1>
         <form id="updateGameForm">
             <table>
                 <tr>
@@ -149,7 +154,7 @@
                 <tr>
                     <td colspan="2">
                         <div class="button-group">
-                            <button type="submit" id="adicionar">Adicionar Jogo</button>
+                            <button type="submit" id="adicionar">Cadastrar Jogo</button> 
                         </div>
                     </td>
                 </tr>
