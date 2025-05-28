@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../js/cadastrarProvedor.js" defer></script>
+    <title>Cadastro de jogo por Provedor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        table td:first-child {
+            width: 30%;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        textarea {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin: 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .button-group button {
+            flex-grow: 1;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button-group button:hover {
+            background-color: #0056b3;
+        }
+        .button-group #consultar { /* Alterado para #consultar */
+            background-color: #28a745;
+        }
+        .button-group #consultar:hover { /* Alterado para #consultar */
+            background-color: #218838;
+        }
+        #res {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #d4edda;
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border-radius: 4px;
+        }
+        #res strong {
+            color: #28a745;
+        }
+        #res.error {
+            border-color: #f5c6cb;
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de jogo por Provedor</h1>
+        <form id="updateGameForm">
+            <table>
+                <tr>
+                    <td><label for="inputId">ID do Jogo para Consulta/Atualização:</label></td>
+                    <td><input type="number" id="inputId" name="inputId" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="button-group">
+                            <button type="button" id="consultar">Consultar Jogo</button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="cod">Código:</label></td>
+                    <td><input type="text" id="cod" name="cod" required></td>
+                </tr>
+                <tr>
+                    <td><label for="name">Nome:</label></td>
+                    <td><input type="text" id="name" name="name" required></td>
+                </tr>
+                <tr>
+                    <td><label for="description">Descrição:</label></td>
+                    <td><textarea id="description" name="description" required></textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="developers">Desenvolvedores:</label></td>
+                    <td><input type="text" id="developers" name="developers" required></td>
+                </tr>
+                <tr>
+                    <td><label for="publisher">Publicadora:</label></td>
+                    <td><input type="text" id="publisher" name="publisher" required></td>
+                </tr>
+                <tr>
+                    <td><label for="price">Preço em Dólares:</label></td>
+                    <td><input type="number" id="price" name="price" step="0.01" required></td>
+                </tr>
+                <tr>
+                    <td><label for="releaseDate">Data de Lançamento:</label></td>
+                    <td><input type="date" id="releaseDate" name="releaseDate" required></td>
+                </tr>
+                <tr>
+                    <td><label for="quantity">Quantidade Disponível:</label></td>
+                    <td><input type="number" id="quantity" name="quantity" required></td>
+                </tr>
+                <tr>
+                    <td><label for="categories">Categorias:</label></td>
+                    <td><input type="text" id="categories" name="categories" placeholder="Ex: Ação, Aventura, RPG" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="button-group">
+                            <button type="submit" id="adicionar">Cadastrar Jogo</button> 
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <div id="res"></div>
+    </div>
+</body>
+</html>
