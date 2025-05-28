@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/cadastrarJogo.js" defer></script>
-    <title>Cadastro de Jogo</title>
+    <script src="../js/cadastrarProvedor.js" defer></script>
+    <title>Cadastro de Jogo por Provedor</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -57,8 +57,13 @@
             resize: vertical;
             min-height: 60px;
         }
-        button {
-            width: 100%;
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .button-group button {
+            flex-grow: 1;
             padding: 10px 15px;
             background-color: #007BFF;
             color: white;
@@ -67,8 +72,14 @@
             cursor: pointer;
             font-size: 16px;
         }
-        button:hover {
+        .button-group button:hover {
             background-color: #0056b3;
+        }
+        .button-group #adicionar {
+            background-color: #28a745;
+        }
+        .button-group #adicionar:hover {
+            background-color: #218838;
         }
         #res {
             margin-top: 20px;
@@ -85,9 +96,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>Cadastro de Jogo</h1>
-        <form id="gameForm">
+        <h1>Cadastro de Jogo por Provedor</h1>
+        <form id="updateGameForm">
             <table>
+                <tr>
+                    <td><label for="inputId">ID do Jogo para Consulta/Atualização:</label></td>
+                    <td><input type="number" id="inputId" name="inputId" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div class="button-group">
+                            <button type="button" id="consultar">Consultar Jogo</button>
+                        </div>
+                    </td>
+                </tr>
                 <tr>
                     <td><label for="cod">Código:</label></td>
                     <td><input type="text" id="cod" name="cod" required></td>
@@ -126,10 +148,14 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <button type="submit" id="cadastrar">Cadastrar Jogo</button>
+                        <div class="button-group">
+                            <button type="submit" id="adicionar">Adicionar Jogo</button>
+                        </div>
                     </td>
                 </tr>
             </table>
         </form>
         <div id="res"></div>
     </div>
+</body>
+</html>
