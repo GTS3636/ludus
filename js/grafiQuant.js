@@ -10,10 +10,10 @@ gravar.addEventListener("click", ()=>{
     arrayNomes = [ ]
     arrayQuants = [ ]
     arrayValor = [ ]
-    fetch("https://api.npoint.io/d7adce794c9085cc1659")
+    fetch("http://localhost:8081/jogos")
     .then(resp=>resp.json())
-    .then(data =>{
-        data.games.forEach(produto => {
+    .then((data) =>{
+        data.forEach(produto => {
             if(arrayNomes.length>5){
                 return
             }else{
