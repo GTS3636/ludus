@@ -42,7 +42,7 @@ cadastrar.addEventListener('click',(e)=>{
             })
             .then(resp => {
                 if (!resp.ok) {
-                    throw new Error(`Erro ${resp.status} - ${resp.statusText}`)
+                    throw new Error(Erro `${resp.status} - ${resp.statusText}`)
                 }
                 return resp.json()
             })

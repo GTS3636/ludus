@@ -103,7 +103,7 @@ atualizarBT.addEventListener('click', (e) => {
     })
     .then((resp) => {
         if (!resp.ok) {
-            throw new Error(`Erro ${resp.status} - ${resp.statusText}`)
+            throw new Error(Erro `${resp.status} - ${resp.statusText}`)
         }
         if (resp.status === 204) {
             return null
