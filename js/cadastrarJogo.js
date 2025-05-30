@@ -1,34 +1,28 @@
-let cadastrar = document.getElementById('cadastrar');
-let res = document.getElementById('res');
+let cadastrar = document.getElementById('cadastrar')
+let cancelar = document.getElementById('cancelar')
+let res = document.getElementById('res')
 
-let cod = document.getElementById('cod')
-let nome = document.getElementById('name')
-let description = document.getElementById('description')
-let developers = document.getElementById('developers')
-let publisher = document.getElementById('publisher')
-let price = document.getElementById('price')
-let releaseDate = document.getElementById('releaseDate')
-let quantity = document.getElementById('quantity')
-let categories = document.getElementById('categories')
+let capa = document.getElementById('capa')
+let titulo = document.getElementById('titulo')
+let id = document.getElementById('id')
+let genero = document.getElementById('genero')
+let data_lancamento = document.getElementById('data_lancamento')
+let nota = document.getElementById('nota')
+let preco = document.getElementById('preco')
+let quantidade = document.getElementById('quantidade')
 
 cadastrar.addEventListener('click', (e) => {
     e.preventDefault();
 
-    if (!cod.value || !nome.value || !description.value || !developers.value || !publisher.value || !price.value || !releaseDate.value || !quantity.value || !categories.value) {
-        alert("Por favor, preencha todos os campos!")
-        return
-    }
-
     const valores = {
-        cod: cod.value,
-        name: nome.value,
-        description: description.value,
-        developers: developers.value,
-        publisher: publisher.value,
-        price: parseFloat(price.value), 
-        releaseDate: releaseDate.value,
-        quantity: parseInt(quantity.value),
-        categories: categories.value
+        cod: id,
+        name: titulo,
+        price: preco,
+        quantity: quantidade,
+        release_date: data_lancamento,
+        categories: genero,
+        capa: capa,
+        nota: nota
     }
     console.log("Enviando para o backend:", valores);
 
@@ -50,20 +44,33 @@ cadastrar.addEventListener('click', (e) => {
     .then(dadosGrav => {
         res.innerHTML = `
             <strong>Jogo cadastrado com sucesso!</strong><br>
-            <p>Código: ${dadosGrav.cod}</p>
-            <p>Nome: ${dadosGrav.name}</p>
-            <p>Descrição: ${dadosGrav.description}</p>
-            <p>Desenvolvedores: ${dadosGrav.developers}</p>
-            <p>Publicadora: ${dadosGrav.publisher}</p>
-            <p>Preço em Dólares: ${dadosGrav.price}</p>
-            <p>Data de lançamento: ${dadosGrav.releaseDate}</p>
-            <p>Quantidade disponível: ${dadosGrav.quantity}</p>
-            <p>Categorias: ${dadosGrav.categories}</p>
+            <img src="${dadosGrav.capa}">
+            <p>Título: ${dadosGrav.name}</p>
+            <p>ID: ${dadosGrav.cod}</p>
+            <p>Gênero: ${dadosGrav.categories}</p>
+            <p>Data de Lançamento: ${dadosGrav.release_date}</p>
+            <p>Nota: ${dadosGrav.nota}</p>
+            <p>Preço: ${dadosGrav.price}</p>
+            <p>Quantidade: ${dadosGrav.quantity}</p>
         `
-        document.getElementById('gameForm').reset();
+        limpar()
     })
     .catch((err) => {
-        console.error('Erro ao gravar os dados no banco de dados!', err);
-        res.innerHTML = 'Erro ao cadastrar jogo: ' + err.message;
-    });
-});
+        console.error('Erro ao gravar os dados no banco de dados!', err)
+        res.innerHTML = 'Erro ao cadastrar jogo: ' + err.message
+    })
+})
+function limpar(){
+    document.getElementById('capa').value = ' '
+    document.getElementById('titulo').value = ' '
+    document.getElementById('id').value = ' '
+    document.getElementById('genero').value = ' '
+    document.getElementById('data_lancamento').value = ' '
+    document.getElementById('nota').value = ' '
+    document.getElementById('preco').value = ' '
+    document.getElementById('quantidade').value = ' '
+}
+cancelar.addEventListener('click',(e)=>{
+    e.preventDefault()
+    limpar()
+})

@@ -1,98 +1,52 @@
+let cadastrar = document.getElementById('cadastrar')
 let consultar = document.getElementById('consultar')
-let adicionar = document.getElementById('adicionar')
+let cancelar = document.getElementById('cancelar')
 let res = document.getElementById('res')
-let cod = document.getElementById('cod')
-let nome = document.getElementById('name')
-let description = document.getElementById('description')
-let developers = document.getElementById('developers')
-let publisher = document.getElementById('publisher')
-let price = document.getElementById('price')
-let releaseDate = document.getElementById('releaseDate')
-let quantity = document.getElementById('quantity')
-let categories = document.getElementById('categories')
-let currentJogoId = null
+
 consultar.addEventListener('click', (e) => {
     e.preventDefault()
-    let inputId = document.getElementById('inputId').value
-    if (!inputId) {
-        res.innerHTML = "Por favor, digite o ID do jogo para consultar!"
-        res.className = 'error'
-        return;
-    }
-    currentJogoId = Number(inputId)
-    res.innerHTML = "Consultando..."
-    res.className = ''
-    cod.value = ''
-    nome.value = ''
-    description.value = ''
-    developers.value = ''
-    publisher.value = ''
-    price.value = ''
-    releaseDate.value = ''
-    quantity.value = ''
-    categories.value = ''
-    fetch(`https://api.npoint.io/d7adce794c9085cc1659/games/${currentJogoId-1}`)
-        .then((resp) => {
-            if (!resp.ok) {
-                if (resp.status === 404) {
-                    throw new Error('Jogo não encontrado na NPoint API!')
-                }
-                throw new Error(`Erro ${resp.status} - ${resp.statusText}`)
-            }
-            return resp.json()
-        })
-        .then((dados) => {
-            console.log("Dados do jogo consultado (NPoint):", dados)
-            res.innerHTML = "Jogo encontrado! Verifique os campos e clique em Cadastrar."
-            cod.value = dados.cod
-            nome.value = dados.name
-            description.value = dados.description
-            developers.value = dados.developer
-            publisher.value = dados.publisher
-            price.value = dados.price
-            releaseDate.value = dados.release_date  
-            quantity.value = dados.quantity
-            categories.value = dados.categories
-        })
-        .catch((err) => {
-            console.error('Erro ao listar dados (NPoint):', err)
-            res.innerHTML = `Erro ao consultar jogo: ${err.message}`
-            res.className = 'error'
-            reset()
-        })
+    fetch('http://https://api.npoint.io/d7adce794c9085cc1659/games/0')
+    .then(resp=>resp.json())
+    .then((data)=>{
+        document.getElementById('capa').value = data.capa
+        document.getElementById('titulo').value = data.name
+        document.getElementById('id').value = data.cod
+        document.getElementById('genero').value = data.categories
+        document.getElementById('data_lancamento').value = data.release_date
+        document.getElementById('nota').value = data.nota
+        document.getElementById('preco').value = data.price
+        document.getElementById('quantidade').value = data.quantity
+        res.innerHTML = "Dados pegos com sucesso! Dê uma olhada antes de cadastrar."
+    })
+    .catch((err)=>{
+        res.innerHTML = "Erro ao pegar os dados"
+        console.error('Ocorreu um erro em pegar os dados: ',err)
+    })
 })
-function reset(){
-    cod.value = '' 
-    nome.value = ''
-    description.value = ''
-    developers.value = ''
-    publisher.value = ''
-    price.value = ''
-    releaseDate.value = ''
-    quantity.value = ''
-    categories.value = ''
-    currentJogoId = null
-}
-adicionar.addEventListener('click', (e) => {
+cadastrar.addEventListener('click',(e)=>{
     e.preventDefault()
-    if (!cod.value || !nome.value || !description.value || !developers.value || !publisher.value || !price.value || !releaseDate.value || !quantity.value || !categories.value) {
-        alert("Por favor, preencha todos os campos para atualização!")
-        return
-    }
+
+    let capa = document.getElementById('capa')
+    let titulo = document.getElementById('titulo')
+    let id = document.getElementById('id')
+    let genero = document.getElementById('genero')
+    let data_lancamento = document.getElementById('data_lancamento')
+    let nota = document.getElementById('nota')
+    let preco = document.getElementById('preco')
+    let quantidade = document.getElementById('quantidade')
+
     const valores = {
-        cod: cod.value,
-        name: nome.value,
-        description: description.value,
-        developers: developers.value,
-        publisher: publisher.value,
-        price: parseFloat(price.value),
-        releaseDate: releaseDate.value,
-        quantity: parseInt(quantity.value),
-        categories: categories.value
+        cod: id,
+        name: titulo,
+        price: preco,
+        quantity: quantidade,
+        release_date: data_lancamento,
+        categories: genero,
+        capa: capa,
+        nota: nota
     }
-    console.log("Enviando para o backend (Atualização):", valores);
-    res.innerHTML = "Atualizando...";
-    res.className = ''
+    console.log("Enviando para o backend:", valores)
+    res.innerHTML = "Cadastrando..."
     fetch(`http://localhost:8081/jogos/cadastrar`, {
         method:'POST',
         headers:{
@@ -109,20 +63,33 @@ adicionar.addEventListener('click', (e) => {
     .then(dadosGrav => {
         res.innerHTML = `
             <strong>Jogo cadastrado com sucesso!</strong><br>
-            <p>Código: ${dadosGrav.cod}</p>
-            <p>Nome: ${dadosGrav.name}</p>
-            <p>Descrição: ${dadosGrav.description}</p>
-            <p>Desenvolvedores: ${dadosGrav.developers}</p>
-            <p>Publicadora: ${dadosGrav.publisher}</p>
-            <p>Preço em Dólares: ${dadosGrav.price}</p>
-            <p>Data de lançamento: ${dadosGrav.releaseDate}</p>
-            <p>Quantidade disponível: ${dadosGrav.quantity}</p>
-            <p>Categorias: ${dadosGrav.categories}</p>
+            <img src="${dadosGrav.capa}">
+            <p>Título: ${dadosGrav.name}</p>
+            <p>ID: ${dadosGrav.cod}</p>
+            <p>Gênero: ${dadosGrav.categories}</p>
+            <p>Data de Lançamento: ${dadosGrav.release_date}</p>
+            <p>Nota: ${dadosGrav.nota}</p>
+            <p>Preço: ${dadosGrav.price}</p>
+            <p>Quantidade: ${dadosGrav.quantity}</p>
         `
-        reset()
+        limpar()
     })
     .catch((err) => {
         console.error('Erro ao gravar os dados no banco de dados!', err)
         res.innerHTML = 'Erro ao cadastrar jogo: ' + err.message
     })
+})
+function limpar(){
+    document.getElementById('capa').value = ' '
+    document.getElementById('titulo').value = ' '
+    document.getElementById('id').value = ' '
+    document.getElementById('genero').value = ' '
+    document.getElementById('data_lancamento').value = ' '
+    document.getElementById('nota').value = ' '
+    document.getElementById('preco').value = ' '
+    document.getElementById('quantidade').value = ' '
+}
+cancelar.addEventListener('click',(e)=>{
+    e.preventDefault()
+    limpar()
 })
